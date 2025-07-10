@@ -1,0 +1,20 @@
+#preview-container:has(>.markdown-body) {
+    flex: 1;
+    max-height: unset;
+    overflow: auto scroll;
+}
+
+.md_preview:has(>.markdown-body) {
+    border: unset;
+    padding: unset;
+}
+
+#preview-container>.markdown-body {
+    margin: 0 auto;
+    max-width: 140ch;
+    padding: 3rem 2rem;
+}
+
+#preview-container>.markdown-body pre code.hljs {
+    padding: unset;
+}

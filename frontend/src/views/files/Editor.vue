@@ -69,6 +69,7 @@ import HeaderBar from "@/components/header/HeaderBar.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useFileStore } from "@/stores/file";
 import { useLayoutStore } from "@/stores/layout";
+import "@/utils/improved-markdown";
 import { getTheme } from "@/utils/theme";
 import { marked } from "marked";
 import { inject, onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
@@ -130,16 +131,20 @@ onMounted(() => {
     value: fileContent,
     showPrintMargin: false,
     readOnly: fileStore.req?.type === "textImmutable",
-    theme: "ace/theme/chrome",
+    theme: "ace/theme/github_light_default",
     mode: modelist.getModeForPath(fileStore.req!.name).mode,
-    wrap: true,
+    wrap: false,
     enableBasicAutocompletion: true,
-    enableLiveAutocompletion: true,
+    enableLiveAutocompletion: false,
     enableSnippets: true,
+    behavioursEnabled: false,
+    vScrollBarAlwaysVisible: true,
   });
 
+  editor.value!.setKeyboardHandler("ace/keyboard/vscode");
+
   if (getTheme() === "dark") {
-    editor.value!.setTheme("ace/theme/twilight");
+    editor.value!.setTheme("ace/theme/github_dark");
   }
 
   editor.value.setFontSize(fontSize.value);
