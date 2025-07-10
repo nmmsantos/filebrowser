@@ -47,9 +47,18 @@ export default defineConfig(({ command }) => {
       resolve,
       base: "",
       build: {
+        manifest: true,
         rollupOptions: {
           input: {
             index: path.resolve(__dirname, "./public/index.html"),
+            "mdPreview-dark": path.resolve(
+              __dirname,
+              "./src/css/mdPreview-dark.css"
+            ),
+            "mdPreview-light": path.resolve(
+              __dirname,
+              "./src/css/mdPreview-light.css"
+            ),
           },
           output: {
             manualChunks: (id) => {
