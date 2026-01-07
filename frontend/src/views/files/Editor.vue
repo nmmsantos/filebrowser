@@ -69,6 +69,7 @@ import HeaderBar from "@/components/header/HeaderBar.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useFileStore } from "@/stores/file";
 import { useLayoutStore } from "@/stores/layout";
+import "@/utils/improved-markdown";
 import { getEditorTheme } from "@/utils/theme";
 import { marked } from "marked";
 import { inject, onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
@@ -124,11 +125,15 @@ onMounted(() => {
     readOnly: fileStore.req?.type === "textImmutable",
     theme: getEditorTheme(authStore.user?.aceEditorTheme ?? ""),
     mode: modelist.getModeForPath(fileStore.req!.name).mode,
-    wrap: true,
+    wrap: false,
     enableBasicAutocompletion: true,
-    enableLiveAutocompletion: true,
+    enableLiveAutocompletion: false,
     enableSnippets: true,
+    behavioursEnabled: false,
+    vScrollBarAlwaysVisible: true,
   });
+
+  editor.value.setKeyboardHandler("ace/keyboard/vscode");
 
   editor.value.setFontSize(fontSize.value);
   editor.value.focus();
